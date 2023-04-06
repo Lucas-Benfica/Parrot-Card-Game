@@ -1,0 +1,57 @@
+body{
+    background-color: #EEF9BF;
+    ;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header{
+    width: 100%;
+    height: 123px;
+
+}
+
+.titulo{
+ 
+    font-family: 'Roboto', sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    color:#75B79E;
+    
+}
+
+.corpo{
+    width: 100%;
+
+}
+.game{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+.card{
+    width: 117px;
+    height: 146px;
+    border-radius: 5px;
+    background-color: #A7E9AF;
+    border: 1px solid #99CEA8;
+    margin: 17px 17px;
+}
+.card img{
+    width: 100px;
+    height: 100px;
+}
+
+
+
+/*.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}*/
