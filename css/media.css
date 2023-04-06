@@ -1,0 +1,12 @@
+@media screen and (max-width: 450px){
+    
+    .titulo{
+        font-size: 36px;
+        width: 312px;
+        text-align: center;
+    }
+    .game{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+}
