@@ -34,24 +34,58 @@ header{
 }
 .game{
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
 }
 .card{
     width: 117px;
     height: 146px;
-    border-radius: 5px;
-    background-color: #A7E9AF;
-    border: 1px solid #99CEA8;
     margin: 17px 17px;
+
+    position: relative;
 }
 .card img{
     width: 100px;
     height: 100px;
 }
-
-
-
-/*.wrapper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}*/
+.face {
+    width: 100%;
+    height: 100%;
+    background-color: #A7E9AF;
+    border-radius: 5px;
+    border: 1px solid #99CEA8;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+  }
+  .back-face {
+    transform: rotateY(180deg);
+  }
+  .front {
+    transform: rotateY(-180deg);
+  }
+  .back {
+    transform: rotateY(0deg);
+  }
+  /* Vou fazer aqui as 7 quantidades de cartas para o jogo e usalas no js*/
+.grid4{
+    grid-template-columns: repeat(2, 1fr);
+}
+.grid6{
+    grid-template-columns: repeat(3, 1fr);
+}
+.grid8{
+    grid-template-columns: repeat(4, 1fr);
+}
+.grid10{
+    grid-template-columns: repeat(5, 1fr);
+}
+.grid12{
+    grid-template-columns: repeat(6, 1fr);
+}
+.grid14{
+    grid-template-columns: repeat(7, 1fr);
+}
