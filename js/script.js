@@ -8,7 +8,53 @@ const imagens = [
     './img/unicornparrot.gif',
 ];
 
+let numCards = 0;
+
 gerarJogo();
+
+let qtdSelecionado = 0;
+let primeira = '';
+let segunda = '';
+let jogadas = 0;
+let tempo = 0;
+let acertos = 0;
+
+
+function selecionar(carta){
+    if(qtdSelecionado < 2){
+
+        if(qtdSelecionado == 0){
+            virarCard(carta);
+            qtdSelecionado = 1;
+            primeira = carta;
+        }
+        else if(qtdSelecionado == 1){
+            
+            if(carta === primeira){
+                //selecione outra carta
+            }
+            else{
+                virarCard(carta);
+                qtdSelecionado = 2;
+                segunda = carta;
+            }
+        }
+    }
+    if(qtdSelecionado == 2){
+
+        if(primeira.id == segunda.id){
+            acertos++;
+            primeira.removeAttribute("onclick");
+            segunda.removeAttribute("onclick");
+            qtdSelecionado = 0;
+        }else if(primeira.id != segunda.id){
+            setTimeout(errou, 1000);
+            qtdSelecionado = 0;
+        }
+    }
+    jogadas++;
+    setTimeout(verificarVitoria, 1000);
+}  
 
 function virarCard(carta){
     //Buscar a frente 
@@ -20,8 +66,19 @@ function virarCard(carta){
     carta2.classList.toggle("back");
 }
 
+function errou(){
+    const carta1 = primeira.querySelector('.carta1');
+    carta1.classList.remove("front");
+    const carta2 = primeira.querySelector('.carta2');
+    carta2.classList.remove("back");
+    const carta3 = segunda.querySelector('.carta1');
+    carta3.classList.remove("front");
+    const carta4 = segunda.querySelector('.carta2');
+    carta4.classList.remove("back");
+}
+
 function gerarJogo(){
-    let numCards = Number(prompt('Com quantas cartas você quer jogar? (pares entre 4 e 14)'));
+    numCards = Number(prompt('Com quantas cartas você quer jogar? (pares entre 4 e 14)'));
     let valido = 0;
     while(valido != 1){                                  // Estou validando a entrada do usuário
         if(numCards < 4 || numCards > 14){
@@ -35,11 +92,9 @@ function gerarJogo(){
         }
     }
 
-    console.log(numCards);
-    const game = document.querySelector('.game');
-    console.log(game);
+    const game = document.querySelector('.game'); 
 
-    switch(numCards){
+    switch(Number(numCards)){
         case 4:
             game.classList.add('grid4');
             break;
@@ -60,7 +115,6 @@ function gerarJogo(){
             break;
     }
     
-    console.log(game);
     let j = 0;
 
     const cartas = [];
@@ -68,37 +122,43 @@ function gerarJogo(){
     for(let i=0; i < numCards; i += 2){
         
         cartas.push(`
-        <div onclick="virarCard(this)" class="card flex">
+        <div data-test="card" id="carta${i}" onclick="selecionar(this)" class="card flex">
             <div class="carta1 face">
-                <img src="./img/back.png">
+                <img data-test="face-down-image" src="./img/back.png">
             </div>
             <div class="carta2 back-face face">
-                <img src='${imagens[j]}'></img>
+                <img ata-test="face-up-image" class="id" src='${imagens[j]}'></img>
             </div>
         </div>
         `)
         cartas.push(`
-        <div onclick="virarCard(this)" class="card flex">
+        <div data-test="card" id="carta${i}" onclick="selecionar(this)" class="card flex">
             <div class="carta1 face">
-                <img src="./img/back.png">
+                <img data-test="face-down-image" src="./img/back.png">
             </div>
             <div class="carta2 back-face face">
-                <img src='${imagens[j]}'></img>
+                <img ata-test="face-up-image" class="id" src='${imagens[j]}'></img>
             </div>
         </div>
         `)
         j++;
     }
-    console.log(cartas);
-    cartas.sort(comparador);
-    console.log(cartas);
+    cartas.sort(comparador); // Embaralhar
 
+    //add as cartas na tela
     for(let j=0;j<cartas.length;j++){
         game.innerHTML += cartas[j];
     }
 
 }
 
+function verificarVitoria(){
+    if(acertos == (numCards/2)){
+        alert(`Você ganhou em ${jogadas} jogadas!`);
+    }
+}
+
 function comparador(){
     return Math.random() - 0.5;
 }
+
