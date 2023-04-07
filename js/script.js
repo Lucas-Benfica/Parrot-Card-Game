@@ -94,6 +94,7 @@ function gerarJogo(){
 
     const game = document.querySelector('.game'); 
 
+    //ajustando o grid de acordo com o numero de cartas
     switch(Number(numCards)){
         case 4:
             game.classList.add('grid4');
@@ -119,6 +120,7 @@ function gerarJogo(){
 
     const cartas = [];
 
+    //gerando as cartas, 2 de cada
     for(let i=0; i < numCards; i += 2){
         
         cartas.push(`
@@ -127,7 +129,7 @@ function gerarJogo(){
                 <img data-test="face-down-image" src="./img/back.png">
             </div>
             <div class="carta2 back-face face">
-                <img ata-test="face-up-image" class="id" src='${imagens[j]}'></img>
+                <img data-test="face-up-image" class="id" src='${imagens[j]}'></img>
             </div>
         </div>
         `)
@@ -137,7 +139,7 @@ function gerarJogo(){
                 <img data-test="face-down-image" src="./img/back.png">
             </div>
             <div class="carta2 back-face face">
-                <img ata-test="face-up-image" class="id" src='${imagens[j]}'></img>
+                <img data-test="face-up-image" class="id" src='${imagens[j]}'></img>
             </div>
         </div>
         `)
