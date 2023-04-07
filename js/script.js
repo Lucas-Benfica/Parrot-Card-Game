@@ -1,5 +1,14 @@
-gerarJogo();
+const imagens = [
+    './img/bobrossparrot.gif',
+    './img/explodyparrot.gif',
+    './img/fiestaparrot.gif',
+    './img/metalparrot.gif',
+    './img/revertitparrot.gif',
+    './img/tripletsparrot.gif',
+    './img/unicornparrot.gif',
+];
 
+gerarJogo();
 
 function virarCard(carta){
     //Buscar a frente 
@@ -26,11 +35,10 @@ function gerarJogo(){
         }
     }
 
-    const cartas = [];
     console.log(numCards);
     const game = document.querySelector('.game');
     console.log(game);
-    
+
     switch(numCards){
         case 4:
             game.classList.add('grid4');
@@ -53,23 +61,44 @@ function gerarJogo(){
     }
     
     console.log(game);
+    let j = 0;
 
-    for(let i=0; i < numCards; i++){
+    const cartas = [];
 
-        game.innerHTML += `
+    for(let i=0; i < numCards; i += 2){
+        
+        cartas.push(`
         <div onclick="virarCard(this)" class="card flex">
             <div class="carta1 face">
                 <img src="./img/back.png">
             </div>
             <div class="carta2 back-face face">
-                Verso
+                <img src='${imagens[j]}'></img>
             </div>
         </div>
-        `
+        `)
+        cartas.push(`
+        <div onclick="virarCard(this)" class="card flex">
+            <div class="carta1 face">
+                <img src="./img/back.png">
+            </div>
+            <div class="carta2 back-face face">
+                <img src='${imagens[j]}'></img>
+            </div>
+        </div>
+        `)
+        j++;
+    }
+    console.log(cartas);
+    cartas.sort(comparador);
+    console.log(cartas);
+
+    for(let j=0;j<cartas.length;j++){
+        game.innerHTML += cartas[j];
     }
 
+}
 
-
-
-
+function comparador(){
+    return Math.random() - 0.5;
 }
